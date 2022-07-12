@@ -1,0 +1,8 @@
+Docker Command
+- docker image ls
+- docker image pull namaimage:tag
+- docker image rm namaimage:tag
+- docker container ls / -a
+- docker container create --name <namacontainer> namaimage:tag
+- docker container start containerId / namaContainer
+- docker container stop containerId / namaContainer
