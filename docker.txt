@@ -1,8 +1,35 @@
+Id : 1074231451
+pw : premiroDocker
+
 Docker Command
+
+# Image
 - docker image ls
 - docker image pull namaimage:tag
 - docker image rm namaimage:tag
+
+# Container
 - docker container ls / -a
-- docker container create --name <namacontainer> namaimage:tag
-- docker container start containerId / namaContainer
-- docker container stop containerId / namaContainer
+- docker container create --name <namacontainer> namaImage:tag
+- docker container start <containerId/namaContainer>
+- docker container stop <containerId/namaContainer>
+- docker container rm <namacontainer>
+- docker container logs <containerId/namaContainer>
+- docker container logs -f <containerId/namaContainer>
+- docker container exec -i -t <containerId/namaContainer> /bin/bash
+- docker container create --name <namaContainer> --publish <porthost>:<portcontainer> image:tag
+- docker container create --name <containerName> --env KEY="value" --env KEY2="value" image:tag
+- docker container stats
+- docker container create --name smallnginx --memory 100m --cpus 0.5 nginx:latest
+- docker container create --name <containerName> --mount "type=bind,source=folder,destination=folder,readonly" image:tag
+
+# Volume
+- docker volume ls
+- docker volume create <volumeName>
+- docker volume rm <volumeName>
+- v
+ a.docker volume create mongodata
+ b.docker container create --name <containerName> --mount "type=volume,source=folder,destination=<volumeName>,readonly" image:tag
+   => docker container create --name mongovolumedata --publish 27019:27017 --mount "type=volume,source=mongovolume,destination=/data/db,readonly" --env MONGO_INITDB_ROOT_USERNAME=kholid --env MONGO_INITDB_ROOT_PASSWORD=kholid mongo:latest
+- 
+-
