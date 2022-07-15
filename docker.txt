@@ -31,5 +31,17 @@ Docker Command
  a.docker volume create mongodata
  b.docker container create --name <containerName> --mount "type=volume,source=folder,destination=<volumeName>,readonly" image:tag
    => docker container create --name mongovolumedata --publish 27019:27017 --mount "type=volume,source=mongovolume,destination=/data/db,readonly" --env MONGO_INITDB_ROOT_USERNAME=kholid --env MONGO_INITDB_ROOT_PASSWORD=kholid mongo:latest
-- 
--
+
+# Backup Volume
+  Back up Container
+1. docker container stop mongovolumedata
+2. docker container create --name nginxbackup --mount "type=bind,source=/home/kholid/Documents/dump/docker-backup-volume,destination=/backup" --mount "type=volume,source=mongovolume,destination=/data" nginx:latest
+3. docker container start nginxbackup
+4. docker container exec -i -t nginxbackup /bin/bash
+5. tar cvf /backup/backup.tar.gz /data
+6. docker container stop nginxbackup
+7. docker container rm nginxbackup
+8. docker container start mongovolumedata
+  Shortcut Backup
+1 docker container stop mongovolume
+2. docker container run --rm --name ubuntubackup --mount "type=bind,source=/home/kholid/Documents/dump/docker-backup-volume,destination=/backup" --mount "type=volume,source=mongovolume,destination=/data" ubuntu:latest tar cvf /backup/backup.tar.gz /data
