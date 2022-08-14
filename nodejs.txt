@@ -1,0 +1,111 @@
+
+// WEB SERVICES
+
+Global Core HTTP
+- const http = require('http');
+
+Build a Server
+1. requestListener = (request, response) => {}
+2. server = http.createServer(requestListener)
+3. server.listen(port, host, ()=>{});
+
+Request Object
+- Destructuring : const { url, method } = request;
+- Stream Data
+    let body = [];
+    request.on('data', (chunk) => {
+        body.push(chunk);
+    });
+    request.on('end', () => {
+        body = Buffer.concat(body).toString();
+        const { name } = JSON.parse(body);
+    });
+
+Response Object
+- response.setHeader("Content-Type: application/json)';
+- response.statusCode(200);
+= response.end('Some Message'); //End
+
+Curl request
+- curl -X GET http://localhost:5000
+- curl -X GET http://localhost:5000 -i
+- curl -X GET -H "Content-Type: application/json" http://localhost:5000 -d "{\"\name": \"Kholid\"}"
+
+
+// With Hapi Framework
+
+Installation
+- npm install @hapi/hapi
+
+Global Core
+const Hapi = require('@hapi/hapi);
+
+Initalize Server
+    const init = async () => {
+        const server = Hapi.server({
+            port: 5000,
+            host: 'localhost',
+        });
+        await server.start();
+        console.log(`Server berjalan pada ${server.info.uri}`);
+    };
+
+Principle 
+= "Single responsibilty principle"
+
+Routing
+    server.route = ([
+        {
+            method: 'GET',
+            path: '/{any*}',
+            handler: (request, h) => {
+                return 'homepage';
+            },
+        },
+        {
+            method: 'GET',
+            path: '/about/{name?}',
+            handler: (request, h) => {
+                const { name = 'default' } = request.params;
+                return 'About page';
+            },
+        },
+    ]);
+
+Path/Url Parameter
+- const { name = 'guest' } = request.params;
+
+Query Parameter
+- const { lang } = request.query;
+
+Body/Payload request
+    handler: (request, h) => {
+        const { username, password } = request.payload; // Otomatis konversi payload ke JSON object
+        return `Welcome ${username}`;
+    },
+
+Response Toolkit
+    - Detailed Notation
+        handler: (request, h) => {
+            const response = h.response('Homepage');
+            response.type('text/plain');
+            response.header('X-CUSTOM', 'some-value');
+            return response;
+        },
+    - Chained Notation
+        handler: (request, h) => {
+            return h.response('About Page')
+                .type('text/plain')
+                .header('X-CUSTOM', 'some-value');
+        },
+
+
+// TOOLS
+- Nodemon : npm install nodemon --save-dev
+- Eslint  : npm install eslint --save-dev
+            npx eslint --init
+- Nanoid  : npm install nanoid@3.x.x
+
+// DATE
+- Created_at = new Date().toISOString();
+- Updated_at = 
