@@ -1,0 +1,26 @@
+
+-- Credential --
+// Login
+psql --username <username>
+
+// Login With db
+psql --username <username> --dbname <database>
+
+// Create New User
+CREATE USER <username> WITH ENCRYPTED PASSWORD '<password>';
+
+// Grant Privileges
+GRANT ALL PRIVILEGES ON DATABASE <<nama database>> TO <<nama user>>;
+
+
+-- DDL --
+// Create DB
+CREATE DATABASE <<nama database>>;
+
+
+-- Behavior --
+// Quit
+\q
+
+// Show All Table
+\dt
