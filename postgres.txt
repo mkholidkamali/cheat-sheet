@@ -24,3 +24,6 @@ CREATE DATABASE <<nama database>>;
 
 // Show All Table
 \dt
+
+// Show All Database
+\list
