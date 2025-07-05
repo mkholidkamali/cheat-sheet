@@ -1,0 +1,7 @@
+# Start N8N locally
+docker run -it \
+  --name n8n \
+  -p 5678:5678 \
+  -v $(pwd)/data:/home/node/.n8n \
+  -e WEBHOOK_URL="https://211f-2404-c0-2470-00-2735-c028.ngrok-free.app/" \
+  n8nio/n8n
