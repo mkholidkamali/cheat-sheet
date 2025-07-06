@@ -8,3 +8,6 @@ docker run -it \
 
 # Start ngrok
 ngrok http 5678
+
+# Get Telegram Chat Detail
+https://api.telegram.org/bot{bot_id}/getUpdates
